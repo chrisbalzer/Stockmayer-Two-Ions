@@ -1,0 +1,123 @@
+#=======================================
+# Sodium-Chloride in Stockmayer Fluid (water dipole)
+#   Created by Chris Balzer (balzer@caltech.edu)
+#   See README.md for description
+#==================================
+
+#======
+# Parameters
+#======
+# Initialize the system set up
+units		      lj
+boundary	    p p p
+atom_style	  hybrid dipole sphere
+atom_modify   map yes
+
+# Read in input data
+read_data	    system.data
+
+# Group atoms
+group         solvent  type 1
+group         ions     type 2 3
+group         anion    type 2
+group         cation   type 3
+group2ndx     groups.ndx cation anion
+
+# Set mass and diameter of spheres
+set type      1 mass 1.0 # solvent
+set type      2 mass 3.9411 # anion
+set type      3 mass 1.2767 # cation
+set type      1 diameter 1.0 # solvent
+set type      2 diameter 1.2067 # anion
+set type      3 diameter 0.6533 # cation
+
+# Set charge of ions
+set type      2 charge -13.626 # anion
+set type      3 charge  13.626 # cation
+
+# Non-bonded interactions
+pair_style	  lj/cut/dipole/long 1.12246204831 5.06974
+pair_coeff	  1 1 1.0 1.0 1.122462 # solvent
+pair_coeff	  2 2 1.0 1.2067 1.354438 # anion
+pair_coeff	  3 3 1.0 0.6533 0.733342 # cation
+kspace_style  ewald/disp 1e-4
+pair_modify   shift yes mix geometric
+
+# Set dipole
+set group solvent dipole/random 4321 1.7494
+
+# Neighbor settings
+neighbor	    0.4 bin
+neigh_modify every 1 delay 0 one 10000
+
+# Temperature computation
+compute tempSph all  temp/sphere
+
+#####################################################
+# Minimization
+minimize 0.0 1.0e-8 100000 100000
+reset_timestep 0
+
+#####################################################
+# Initialization (NVT Sphere with spring)
+
+velocity       all create 1.0 4928459
+fix		         1 all nve/sphere update dipole
+fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
+fix            3 ions recenter 0.5 0.5 0.5 units fraction shift all
+fix            4 cation spring couple anion 50.0 0.0 0.0 0.0 1.25
+
+thermo		     1000
+thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy
+thermo_modify  norm no
+dump	       	 1 all custom 10000 dump.dipoleInit id type x y z q mux muy muz
+
+timestep	     0.005
+run		         100000
+
+undump         1
+unfix          1
+unfix          2
+unfix          3
+unfix          4
+
+#####################################################
+# Equilibration (NVT Sphere with colvars)
+
+fix		         1 all nve/sphere update dipole
+fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
+fix            3 ions colvars input.equil.colvars output equil
+
+thermo		     1000
+thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy
+thermo_modify  norm no
+dump	       	 1 all custom 10000 dump.dipoleEquil id type x y z q mux muy muz
+
+timestep	     0.005
+run		         500000
+
+undump         1
+unfix          1
+unfix          2
+unfix          3
+
+#####################################################
+# Production (NVT Sphere with colvars)
+
+reset_timestep 0
+fix		         1 all nve/sphere update dipole
+fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
+fix            3 ions colvars input.prod.colvars output prod
+
+thermo		     1000
+thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy
+thermo_modify  norm no
+dump	       	 1 all custom 10000 dump.dipoleProd id type x y z q mux muy muz
+
+timestep	     0.005
+run		         500000
+
+undump         1
+unfix          1
+unfix          2
+unfix          3
