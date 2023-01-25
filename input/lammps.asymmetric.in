@@ -86,7 +86,7 @@ unfix          4
 
 fix		         1 all nve/sphere update dipole
 fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
-fix            3 ions colvars input.equil.colvars output equil
+fix            3 ions colvars input.colvars output equil
 
 thermo		     1000
 thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy
@@ -107,7 +107,7 @@ unfix          3
 reset_timestep 0
 fix		         1 all nve/sphere update dipole
 fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
-fix            3 ions colvars input.prod.colvars output prod
+fix            3 ions colvars input.colvars input equil output prod
 
 thermo		     1000
 thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy

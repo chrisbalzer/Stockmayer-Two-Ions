@@ -4,8 +4,6 @@ Created by Chris Balzer (balzer@caltech.edu). Distributed under the MIT Licence.
 ## Overview
 This repository contains the necessary input files to calculate one window of a potential of mean force (PMF) for two ions in a Stockmayer fluid. Inputs are provided for symmetric ions (as explored in the paper) and for asymmetric ions (i.e. NaCl).
 
-![](box.gif)
-
 ## Contents
 - ``input/``: Input files
 - ``output-asymmetric/``: Output files for asymmetric ions
@@ -20,10 +18,10 @@ This repository contains the necessary input files to calculate one window of a 
 *Note that this system size may be too small to accurately get long range electrostatics. Only for demonstration/testing.*
 
 ## Input Description
-For each example, the distance betweem the two ions is constrained between 2.25 and 6.0 Angstroms (0.75-2.0 sigma). The LAMMPS files provided go through energy minimization, initialization, equilibration, and production. Dump and thermo outputs are less frequent for space saving in the example.
+For each example, the distance betweem the two ions is constrained between 2.25 and 7.5 Angstroms (0.75-2.5 sigma). The LAMMPS files provided go through energy minimization, initialization, equilibration, and production. Dump and thermo outputs are less frequent for space saving in the example.
 - ``lammps.*.in`` - LAMMPS input file
 - ``system.data`` - Initial system configuration
-- ``input.equil.colvars`` and ``input.prod.colvars`` - Adaptive Biasing Force (ABF) input files to use the ``COLVARS`` package
+- ``input.colvars`` - Adaptive Biasing Force (ABF) input files to use the ``COLVARS`` package
 
 ## Running the Example
 To run the example, LAMMPS must be compiled. Instructions to build LAMMPS can be found [here](https://docs.lammps.org/Build.html). The packages required for this project are the ``DIPOLE``, ``COLVARS``, ``KSPACE``, and ``MISC``. For speed reasons, it may be advantageous to enable the ``GPU`` package. If using the GPU package, one can run the example using

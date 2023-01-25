@@ -1,11 +1,11 @@
 #==================================
-# COLVARS Input for production
+# COLVARS Input for equilibration
 #   Created by Chris Balzer (balzer@caltech.edu)
 #   See README.md for description
 #==================================
 
 indexFile groups.ndx
-colvarsTrajFrequency 500
+colvarsTrajFrequency 1000
 
 colvar {
   name dist
@@ -14,7 +14,7 @@ colvar {
     group2 { indexGroup anion  }
   }
   lowerBoundary 0.75
-  upperBoundary 2.0
+  upperBoundary 2.5
   width 0.01
 }
 
@@ -25,14 +25,13 @@ abf {
    outputFreq 1000
    outputEnergy on
    historyFreq 1000000
-   inputPrefix equil
 }
 
 harmonicWalls {
   name wall_dist
   colvars dist
   lowerWalls 0.7
-  upperWalls 2.05
+  upperWalls 2.55
   lowerWallConstant 1.0
   upperWallConstant 1.0
 }
