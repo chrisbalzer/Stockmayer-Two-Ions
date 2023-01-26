@@ -37,4 +37,4 @@ The output files are ...
 - ``log.lammps`` - LAMMPS log file
 - ``dump.dipoleInit``,``dump.dipoleEquil``,``dump.dipoleProd`` - Coordinates and dipole moment during initialization, equilibration, and production
 - ``equil.pmf``, ``prod.pmf`` - The PMF calcualted from ABF
-- ``equil.colvars.traj``, ``prod.colvars.traj`` - Instantaneous value of the collective variable (distance between ions)
+- ``thermo.equil``, ``thermo.prod`` - Energy output and instantaneous value of the ion separation
