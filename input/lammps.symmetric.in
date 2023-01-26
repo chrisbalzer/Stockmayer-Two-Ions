@@ -53,6 +53,16 @@ neigh_modify every 1 delay 0 one 10000
 # Temperature computation
 compute tempSph all  temp/sphere
 
+# Distance between ions
+compute ionDist ions pair/local dist
+compute avgIonDist ions reduce ave c_ionDist
+
+# Variables for output
+variable Step  equal "step"
+variable Temp  equal "c_tempSph"
+variable EPot  equal "pe"
+variable IonDist equal "c_avgIonDist"
+
 #####################################################
 # Minimization
 minimize 0.0 1.0e-8 100000 100000
@@ -63,11 +73,11 @@ reset_timestep 0
 
 velocity       all create 1.0 4928459
 fix		         1 all nve/sphere update dipole
-fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
+fix            2 all langevin 1.0 1.0 1.0 532123 omega yes
 fix            3 ions recenter 0.5 0.5 0.5 units fraction shift all
 fix            4 cation spring couple anion 50.0 0.0 0.0 0.0 1.25
 
-thermo		     1000
+thermo		     10000
 thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy
 thermo_modify  norm no
 dump	       	 1 all custom 10000 dump.dipoleInit id type x y z q mux muy muz
@@ -85,10 +95,11 @@ unfix          4
 # Equilibration (NVT Sphere with colvars)
 
 fix		         1 all nve/sphere update dipole
-fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
+fix            2 all langevin 1.0 1.0 1.0 532123 omega yes
 fix            3 ions colvars input.colvars output equil
+fix            4 all print 1000 "${Step} ${Temp} ${EPot} ${IonDist}" screen no file thermo.equil title "# Step Temp EPot IonDist"
 
-thermo		     1000
+thermo		     10000
 thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy
 thermo_modify  norm no
 dump	       	 1 all custom 10000 dump.dipoleEquil id type x y z q mux muy muz
@@ -100,16 +111,18 @@ undump         1
 unfix          1
 unfix          2
 unfix          3
+unfix          4
 
 #####################################################
 # Production (NVT Sphere with colvars)
 
 reset_timestep 0
 fix		         1 all nve/sphere update dipole
-fix            2 all langevin 1.0 1.0 1.0 214323 omega yes
+fix            2 all langevin 1.0 1.0 1.0 532123 omega yes
 fix            3 ions colvars input.colvars input equil output prod
+fix            4 all print 1000 "${Step} ${Temp} ${EPot} ${IonDist}" screen no file thermo.prod title "# Step Temp EPot IonDist"
 
-thermo		     1000
+thermo		     10000
 thermo_style	 custom step temp c_tempSph press etotal pe ke epair ecoul elong evdwl enthalpy
 thermo_modify  norm no
 dump	       	 1 all custom 10000 dump.dipoleProd id type x y z q mux muy muz
@@ -121,3 +134,4 @@ undump         1
 unfix          1
 unfix          2
 unfix          3
+unfix          4

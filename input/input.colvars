@@ -23,7 +23,6 @@ abf {
    colvars dist
    fullSamples 1000
    outputFreq 1000
-   outputEnergy on
    historyFreq 1000000
 }
 

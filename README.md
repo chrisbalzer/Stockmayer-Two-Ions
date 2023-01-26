@@ -4,6 +4,8 @@ Created by Chris Balzer (balzer@caltech.edu). Distributed under the MIT Licence.
 ## Overview
 This repository contains the necessary input files to calculate one window of a potential of mean force (PMF) for two ions in a Stockmayer fluid. Inputs are provided for symmetric ions (as explored in the paper) and for asymmetric ions (i.e. NaCl).
 
+![](box.gif)
+
 ## Contents
 - ``input/``: Input files
 - ``output-asymmetric/``: Output files for asymmetric ions
