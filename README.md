@@ -1,8 +1,8 @@
 # Example Scripts for Two Ions in a Dipolar Solvent
-Created by Chris Balzer (balzer@caltech.edu). Distributed under the MIT Licence.
+Created by Chris Balzer (balzer@caltech.edu). Distributed under the MIT Licence. Please cite our paper if you find this useful.
 
 ## Overview
-This repository contains the necessary input files to calculate one window of a potential of mean force (PMF) for two ions in a Stockmayer fluid. Inputs are provided for symmetric ions (as explored in the paper) and for asymmetric ions (i.e. NaCl).
+This repository contains the necessary input files to calculate one window of a potential of mean force (PMF) for two ions in a Stockmayer fluid based on the paper by [Varner, Balzer, and Wang](https://doi.org/10.1021/acs.jpcb.3c00588). Inputs are provided for symmetric ions (as explored in the paper) and for asymmetric ions (i.e. NaCl).
 
 ![](box.gif)
 
