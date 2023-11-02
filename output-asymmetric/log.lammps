@@ -1,7 +1,6 @@
-LAMMPS (3 Aug 2022)
 #=======================================
-# Sodium-Chloride in Stockmayer Fluid (water dipole)
-#   Created by Chris Balzer (balzer@caltech.edu)
+# Symmetric Ions in Stockmayer Fluid (water dipole)
+#   Created by Chris Balzer
 #   See README.md for description
 #==================================
 
