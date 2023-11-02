@@ -26,7 +26,7 @@ For each example, the distance betweem the two ions is constrained between 2.25 
 - ``input.colvars`` - Adaptive Biasing Force (ABF) input files to use the ``COLVARS`` package
 
 ## Running the Example
-To run the example, LAMMPS must be compiled. Instructions to build LAMMPS can be found [here](https://docs.lammps.org/Build.html). The packages required for this project are the ``DIPOLE``, ``COLVARS``, ``KSPACE``, and ``MISC``. For speed reasons, it may be advantageous to enable the ``GPU`` package. If using the GPU package, one can run the example using
+To run the example, LAMMPS must be compiled. For the results generated here, the LAMMPS version as of 22 Dec 2022 was used. Instructions to build LAMMPS can be found [here](https://docs.lammps.org/Build.html). The packages required for this project are the ``DIPOLE``, ``COLVARS``, ``KSPACE``, and ``MISC``. For speed reasons, it may be advantageous to enable the ``GPU`` package. If using the GPU package, one can run the example using
 
 ```
 lmp_gpu -sf gpu -pk gpu 1 -in lammps.*.in
