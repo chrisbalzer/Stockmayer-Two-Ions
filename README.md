@@ -15,15 +15,15 @@ This repository contains the necessary input files to calculate one window of a 
 - ``output-symmetric/``: Output files for asymmetric ions
 
 ### Asymmetric System Description
-1000 water molecules (0.03344 #/$A^3`$) at 300K with dipole moment 1.85 Debyes. Anion and cation are modeled after chlorine and sodium, respectively. The diameters (LJ $`\sigma`$) for each are 3.0 $A^3`$, 3.62 $A^3`$, 1.96 $A^3`$ for water, Cl-, and Na+, respectively. The LJ unit of mass is 18.01528 g/mol. The LJ unit of length is 3.0 $A^3`$. Water and NaCl parameters from [Shock et al](https://pubs.acs.org/doi/full/10.1021/acs.jpcb.0c00769).
+1000 water molecules (0.03344 #/$A^3$) at 300K with dipole moment 1.85 Debyes. Anion and cation are modeled after chlorine and sodium, respectively. The diameters (LJ $`\sigma`$) for each are 3.0 $A^3$, 3.62 $A^3$, 1.96 $A^3$ for water, Cl-, and Na+, respectively. The LJ unit of mass is 18.01528 g/mol. The LJ unit of length is 3.0 $A^3$. Water and NaCl parameters from [Shock et al](https://pubs.acs.org/doi/full/10.1021/acs.jpcb.0c00769).
 
 ### Symmetric System Description
-1000 water molecules (0.03344 #/$A^3`$) at 300K with dipole moment 1.85 Debyes. Anion and cation are monovalent and symmetric in size. The diameters (LJ $`\sigma`$) for all components are 3.0 $A^3`$. The LJ unit of mass is 18.01528 g/mol. The LJ unit of length is 3.0 $A^3`$.
+1000 water molecules (0.03344 #/$A^3$) at 300K with dipole moment 1.85 Debyes. Anion and cation are monovalent and symmetric in size. The diameters (LJ $`\sigma`$) for all components are 3.0 $A^3$. The LJ unit of mass is 18.01528 g/mol. The LJ unit of length is 3.0 $A^3$.
 
 *Note that this system size may be too small to accurately get long range electrostatics. Only for demonstration/testing.*
 
 ## Input Description
-For each example, the distance betweem the two ions is constrained between 2.25 and 7  5$A^3`$ (0.75-2.5$`\sigma`$). The LAMMPS files provided go through energy minimization, initialization, equilibration, and production. Dump and thermo outputs are less frequent for space saving in the example.
+For each example, the distance betweem the two ions is constrained between 2.25 and 7  5$A^3$ (0.75-2.5$`\sigma`$). The LAMMPS files provided go through energy minimization, initialization, equilibration, and production. Dump and thermo outputs are less frequent for space saving in the example.
 - ``lammps.*.in`` - LAMMPS input file
 - ``system.data`` - Initial system configuration
 - ``input.colvars`` - Adaptive Biasing Force (ABF) input files to use the ``COLVARS`` package
