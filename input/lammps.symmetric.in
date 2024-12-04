@@ -55,7 +55,7 @@ compute tempSph all  temp/sphere
 
 # Distance between ions
 compute ionDist ions pair/local dist
-compute avgIonDist ions reduce ave c_ionDist
+compute avgIonDist ions reduce ave c_ionDist inputs local
 
 # Variables for output
 variable Step  equal "step"
